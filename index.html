@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIMAS CEL Pulsa Murah & Cepat</title>
+    <style>
+        * {margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif;}
+        body {background:linear-gradient(135deg, #4facfe, #00f2fe); min-height:100vh; padding:20px;}
+        .wadah {max-width:420px; margin:0 auto;}
+        header {text-align:center; color:white; padding:25px 0;}
+        header h1 {font-size:22px; margin-bottom:5px;}
+        .kotak {background:white; border-radius:15px; padding:20px; box-shadow:0 5px 20px #0002;}
+        label {display:block; font-weight:bold; margin:15px 0 8px; color:#333;}
+        input {width:100%; padding:12px; border:2px solid #ddd; border-radius:8px; font-size:16px;}
+        .pilihan {display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;}
+        .item {border:2px solid #ddd; border-radius:8px; padding:12px; text-align:center; cursor:pointer;}
+        .item.aktif {border-color:#4facfe; background:#e6f7ff;}
+        .item .nilai {font-weight:bold; font-size:15px;}
+        .item .hrg {font-size:12px; color:#666; margin-top:4px;}
+        button {width:100%; background:#25d366; color:white; border:none; padding:14px; font-size:17px; font-weight:bold; border-radius:8px; margin-top:20px; cursor:pointer;}
+        .info {background:#e8f5e9; border-left:4px solid #4caf50; padding:12px; margin-top:20px; font-size:13px; border-radius:4px;}
+        footer {text-align:center; color:white; margin-top:25px; font-size:13px; opacity:0.9;}
+    </style>
+</head>
+<body>
+    <div class="wadah">
+        <header>
+            <h1>⚡ DIMAS CEL
+            <p>Isi Pulsa Cepat & Murah</p>
+        </header>
+
+        <div class="kotak">
+            <label>📱 Nomor HP</label>
+            <input type="tel" id="nohp" placeholder="Contoh: 08123456789">
+
+            <label>💰 Pilih Nominal</label>
+            <div class="pilihan">
+                <div class="item" onclick="pilih(this,'5.000','Rp 5.500')"><div class="nilai">Rp 5.000</div><div class="hrg">Rp 5.500</div></div>
+                <div class="item" onclick="pilih(this,'10.000','Rp 10.500')"><div class="nilai">Rp 10.000</div><div class="hrg">Rp 10.500</div></div>
+                <div class="item" onclick="pilih(this,'20.000','Rp 20.500')"><div class="nilai">Rp 20.000</div><div class="hrg">Rp 20.500</div></div>
+                <div class="item" onclick="pilih(this,'50.000','Rp 50.500')"><div class="nilai">Rp 50.000</div><div class="hrg">Rp 50.500</div></div>
+            </div>
+
+            <button onclick="kirimKeWA()">💖 Pesan via WhatsApp</button>
+
+            <div class="info">
+                ✅ Cara Pesan:<br>
+                1. Masukkan nomor HP<br>
+                2. Pilih nominal pulsa<br>
+                3. Klik tombol hijau<br>
+                4. Chat WA → bayar → proses ✅
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2026 Toko DIMAS CEL<br>
+            Hubungi: 0831-0895-4961
+        </footer>
+    </div>
+
+    <script>
+        let pilihNominal = '';
+        let pilihHarga = '';
+
+        function pilih(el, nominal, harga) {
+            document.querySelectorAll('.item').forEach(i => i.classList.remove('aktif'));
+            el.classList.add('aktif');
+            pilihNominal = nominal;
+            pilihHarga = harga;
+        }
+
+        function kirimKeWA() {
+            const nohp = document.getElementById('nohp').value;
+            if (!nohp) { alert('Masukkan nomor HP dulu ya!'); return; }
+            if (!pilihNominal) { alert('Pilih nominal pulsa dulu!'); return; }
+
+            // 👇 GANTI NOMOR WA KAMU DI BAWAH INI
+            const noWA = '6281234567890'; 
+            const teks = encodeURIComponent(
+                'Halo! Saya mau pesan pulsa:\n'+
+                '📱 Nomor: '+nohp+'\n'+
+                '💰 Nominal: '+pilihNominal+'\n'+
+                '💵 Harga: '+pilihHarga+'\n\nTerima kasih!'
+            );
+            window.open('https://wa.me/'+noWA+'?text='+teks, '_blank');
+        }
+    </script>
+</body>
+</html>
